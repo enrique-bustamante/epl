@@ -1,0 +1,39 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aiohttp = "*"
+async-generator = "*"
+async-timeout = "*"
+attrs = "*"
+beautifulsoup4 = "*"
+bleach = "*"
+certifi = "*"
+chardet = "*"
+click = "*"
+cycler = "*"
+dataframe-image = "*"
+defusedxml = "*"
+entrypoints = "*"
+flask = "*"
+gunicorn = "*"
+idna = "*"
+ipython-genutils = "*"
+itsdangerous = "*"
+jinja2 = "*"
+joblib = "*"
+jsonschema = "*"
+jupyter-client = "*"
+jupyter-core = "*"
+jupyterlab-pygments = "*"
+kiwisolver = "*"
+pandas = "*"
+scikit-learn = "*"
+numpy = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
