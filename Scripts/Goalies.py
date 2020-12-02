@@ -9,8 +9,8 @@ def goalies():
 
     goalieDf = pd.read_csv('Resources/Goalkeepers.csv')
     goalieDf
-    #lastWeekRankDf = pd.read_csv('Rankings/GoalieRank.csv')[['Name','Ranking']]
-    #lastWeekRankDf = lastWeekRankDf.set_index('Name')
+    lastWeekRankDf = pd.read_csv('Rankings/GoalieRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
 
     goalieDfClean, costDf, goalieForm = cleanDataFrame(goalieDf)
@@ -44,7 +44,7 @@ def goalies():
     prodGoalDf = prodGoalDf[['Value', 'Cost', 'Home and Away']]
 
     prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
-    #prodGoalDf['Last Week Ranking'] = lastWeekRankDf
+    prodGoalDf['Last Week Ranking'] = lastWeekRankDf
 
 
     prodGoalDf.to_csv('Rankings/GoalieRank.csv')

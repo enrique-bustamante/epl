@@ -1,4 +1,4 @@
-
+# %%
 # Import dependencies
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -6,12 +6,14 @@ from sklearn.model_selection import train_test_split
 from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost
 import dataframe_image as dfi
 
-
+# %%
 # read in the data
 midDf = pd.read_csv('Resources/Midfielders.csv')
 midDf
+lastWeekRankDf = pd.read_csv('Rankings/MidRank.csv')[['Name','Ranking']]
+lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
-
+# %%
 midDf, costDf, midForm = cleanDataFrame(midDf)
 midDf
 
@@ -40,6 +42,12 @@ prodMidDf['Home and Away'] = homeAwayDiffmid['Value']
 
 prodMidDf = prodMidDf[['Value', 'Cost', 'Home and Away']]
 
+# %%
+prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
+prodMidDf['Last Week Ranking'] = lastWeekRankDf
+
 prodMidDf.to_csv('Rankings/midRank.csv')
 
 dfi.export(prodMidDf.head(20), 'static/MidRank.png')
+
+# %%
