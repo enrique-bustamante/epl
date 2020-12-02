@@ -10,6 +10,8 @@ import dataframe_image as dfi
 # Load in the data
 defenderDf = pd.read_csv('Resources/Defenders.csv')
 defenderDf
+lastWeekRankDf = pd.read_csv('Rankings/DefendersRank.csv')[['Name','Ranking']]
+lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
 # %%
 defenderDf.isnull().sum()
@@ -44,7 +46,13 @@ prodDefDf['Home and Away'] = homeAwayDiffdefender['Value']
 
 prodDefDf = prodDefDf[['Value', 'Cost', 'Home and Away']]
 
+# %%
+prodDefDf['Ranking'] = prodDefDf['Value'].rank(ascending=False)
+prodDefDf['Last Week Ranking'] = lastWeekRankDf
+
 # Save file to Rankings folder
 prodDefDf.to_csv('Rankings/DefendersRank.csv')
 
 dfi.export(prodDefDf.head(20), 'static/DefenderRank.png')
+
+# %%
