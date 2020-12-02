@@ -9,7 +9,8 @@ def forwards():
 
     forwardsDf = pd.read_csv('Resources/Forwards.csv')
     forwardsDf
-
+    lastWeekRankDf = pd.read_csv('Rankings/forwardsRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
 
     forwardsDf, costDf, forwardForm = cleanDataFrame(forwardsDf)
@@ -42,6 +43,9 @@ def forwards():
     prodForwardDf['Home and Away'] = homeAwayDiffForwards['Value']
 
     prodForwardDf = prodForwardDf[['Value', 'Cost', 'Home and Away']]
+
+    prodForwardDf['Ranking'] = prodForwardDf['Value'].rank(ascending=False)
+    prodForwardDf['Last Week Ranking'] = lastWeekRankDf
 
     prodForwardDf.to_csv('Rankings/forwardsRank.csv')
 
