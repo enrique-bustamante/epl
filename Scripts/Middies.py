@@ -10,8 +10,8 @@ def mids():
     # read in the data
     midDf = pd.read_csv('Resources/Midfielders.csv')
     midDf
-    lastWeekRankDf = pd.read_csv('Rankings/MidRank.csv')[['Name','Ranking']]
-    lastWeekRankDf = lastWeekRankDf.set_index('Name')
+    #lastWeekRankDf = pd.read_csv('Rankings/MidRank.csv')[['Name','Ranking']]
+    #lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
 
     midDf, costDf, midForm = cleanDataFrame(midDf)
@@ -43,7 +43,7 @@ def mids():
     prodMidDf = prodMidDf[['Value', 'Cost', 'Home and Away']]
 
     prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
-    prodMidDf['Last Week Ranking'] = lastWeekRanMid
+    #prodMidDf['Last Week Ranking'] = lastWeekRanMid
 
     prodMidDf.to_csv('Rankings/midRank.csv')
 

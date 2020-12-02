@@ -44,7 +44,7 @@ def goalies():
     prodGoalDf = prodGoalDf[['Value', 'Cost', 'Home and Away']]
 
     prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
-    prodGoalDf['Last Week Ranking'] = lastWeekRankDf
+    #prodGoalDf['Last Week Ranking'] = lastWeekRankDf
 
 
     prodGoalDf.to_csv('Rankings/GoalieRank.csv')
