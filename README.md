@@ -54,9 +54,22 @@ For the cloneDfs() function, I simply created two filtered tables based on
 location being either Home or Away. These two tables are used to find the
 difference between home and away performance.
 
-###
+### Category per Cost
 
+For the categoryPerCost() function, I pass through a dataframe and a list of columns that I control for cost. This function runs a for loop through the list and divides those specific columns by the cost of the player, to control for price. The output is a dataframe, with the specified columns divided by cost.
 
+### Linear Regression Analysis
 
-## Linear Regression Analysis
+The linearRegressionAnalysis() function takes the dataframe and separates it into features and labels, fits the data, then makes a prediction. The coefficient array is then multiplied across the features and summed to achieve the value. The prediction is also added to the dataframe that is output.
 
+### Home Away Spread
+
+The homeAwayDifference functions take the two dataframes, home and away, and creates a new dataframe with the new values.
+
+### Home or Away
+
+Lastly, for the homeOrAway() function, I added this within the cleanDataFrame() function to determine if the location was a home or away game.
+
+## Limitations
+
+One limitation of this model is that if the site is refreshed, it will run the calculations again and the current rankings and last week rankings will be the same. I am thinking of adding an Update button and only run the script by calling that action.

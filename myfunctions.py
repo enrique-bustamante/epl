@@ -13,6 +13,7 @@ def linearRegressionAnalysis(df: pd.DataFrame) -> pd.DataFrame:
     regr.coef_
     prodDf = X * regr.coef_
     prodDf['Value'] = prodDf.sum(axis=1)
+    prodDf['Prediction'] = y_pred
     prodDf = prodDf.sort_values('Value', ascending=False)
 
     return prodDf
