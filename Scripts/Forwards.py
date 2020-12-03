@@ -41,7 +41,7 @@ def forwards():
     # Add in the home away value
     prodForwardDf['Home and Away'] = homeAwayDiffForwards['Value']
 
-    prodForwardDf = prodForwardDf[['Value', 'Cost', 'Home and Away']]
+    prodForwardDf = prodForwardDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
     prodForwardDf['Ranking'] = prodForwardDf['Value'].rank(ascending=False)
     prodForwardDf['Last Week Ranking'] = lastWeekRankDf

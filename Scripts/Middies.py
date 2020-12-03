@@ -39,7 +39,7 @@ def mids():
     # Add in the home away value
     prodMidDf['Home and Away'] = homeAwayDiffmid['Value']
 
-    prodMidDf = prodMidDf[['Value', 'Cost', 'Home and Away']]
+    prodMidDf = prodMidDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
     prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
     prodMidDf['Last Week Ranking'] = lastWeekRankDf

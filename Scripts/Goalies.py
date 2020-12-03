@@ -40,7 +40,7 @@ def goalies():
     # Add in the home away value
     prodGoalDf['Home and Away'] = homeAwayDiffGoalie['Value']
 
-    prodGoalDf = prodGoalDf[['Value', 'Cost', 'Home and Away']]
+    prodGoalDf = prodGoalDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
     prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
     prodGoalDf['Last Week Ranking'] = lastWeekRankDf

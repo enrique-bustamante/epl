@@ -42,7 +42,7 @@ def defenders():
     # Add in the home away value
     prodDefDf['Home and Away'] = homeAwayDiffdefender['Value']
 
-    prodDefDf = prodDefDf[['Value', 'Cost', 'Home and Away']]
+    prodDefDf = prodDefDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
     prodDefDf['Ranking'] = prodDefDf['Value'].rank(ascending=False)
     prodDefDf['Last Week Ranking'] = lastWeekRankDf
 
