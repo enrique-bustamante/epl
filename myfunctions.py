@@ -1,4 +1,6 @@
-def linearRegressionAnalysis(df):
+# %%
+import pandas as pd
+def linearRegressionAnalysis(df: pd.DataFrame) -> pd.DataFrame:
     y = df['Pts']
     X = df.drop(columns=['Cost','Pts', 'Minutes played'])
 
@@ -16,21 +18,21 @@ def linearRegressionAnalysis(df):
     return prodDf
 
 
-def homeAwayDifference(df1, df2):
+def homeAwayDifference(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
     groupbyDfHome = df1.groupby('Name').mean().dropna()
     groupbyDfAway = df2.groupby('Name').mean().dropna()
     homeAwayDiffDf = groupbyDfHome - groupbyDfAway
     return homeAwayDiffDf
 
 
-def cloneDfs(df):
+def cloneDfs(df: pd.DataFrame) -> pd.DataFrame:
 
     homeDf = df[df['Location'] == 'Home']
     awayDf = df[df['Location'] == 'Away']
     return homeDf, awayDf
 
 
-def cleanDataFrame(df):
+def cleanDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     gameWeek: int = df['Gameweek'].max()
 
     df['Cost'] = df['Cost'].replace('£','', regex=True).astype(float)
@@ -52,9 +54,11 @@ def homeOrAway(data: str) -> str:
         else:
             return 'Away'
 
-def categoryPerCost(df, listOfCategories):
+def categoryPerCost(df: pd.DataFrame, listOfCategories: list) -> pd.DataFrame:
     for category in listOfCategories:
         df[category] = df[category]/df['Cost']
     return df
 
 
+
+# %%
