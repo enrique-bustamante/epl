@@ -55,5 +55,6 @@ def homeOrAway(data: str) -> str:
 def categoryPerCost(df, listOfCategories):
     for category in listOfCategories:
         df[category] = df[category]/df['Cost']
+    return df
 
 

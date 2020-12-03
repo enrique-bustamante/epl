@@ -10,25 +10,22 @@ def defenders():
     # %%
     # Load in the data
     defenderDf = pd.read_csv('Resources/Defenders.csv')
-    defenderDf
     lastWeekRankDf = pd.read_csv('Rankings/DefendersRank.csv')[['Name','Ranking']]
     lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
     # %%
-    defenderDf.isnull().sum()
-    # %%
     # Clean the data to make suitable for linear regression analysis
     defenderDf, costDf, defenderForm = cleanDataFrame(defenderDf)
-    defenderDf
 
+    # Create the home and away tables to determine the spread
     defenderDfHome, defenderDfAway = cloneDfs(defenderDf)
 
-
+    # Group by name and get the averages
     defenderGroupbyDf = defenderDf.groupby('Name').mean()
 
     listOfCategories = ['Pts', 'Goals scored', 'Assists', 'Clean sheets', 'Goals conceded', 'Own goals', 'Penalties saved', 'Penalties missed', 'Yellow cards', 'Red cards', 'Saves', 'Bonus', 'Bonus Points System']
 
-    categoryPerCost(defenderGroupbyDf, listOfCategories)
+    defenderGroupbyDf = categoryPerCost(defenderGroupbyDf, listOfCategories)
 
     defenderGroupbyDf['Availability'] = defenderGroupbyDf['Minutes played']/90
     defenderGroupbyDf['Form'] = defenderForm
