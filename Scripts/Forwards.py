@@ -46,7 +46,7 @@ def forwards():
     prodForwardDf['Ranking'] = prodForwardDf['Value'].rank(ascending=False)
     prodForwardDf['Last Week Ranking'] = lastWeekRankDf
 
-    # Save file to Rankings folder
+    # Save files to Rankings and static folders
     prodForwardDf.to_csv('Rankings/forwardsRank.csv')
 
     dfi.export(prodForwardDf.head(20), 'static/ForwardRank.png')

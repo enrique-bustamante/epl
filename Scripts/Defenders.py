@@ -46,7 +46,7 @@ def defenders():
     prodDefDf['Ranking'] = prodDefDf['Value'].rank(ascending=False)
     prodDefDf['Last Week Ranking'] = lastWeekRankDf
 
-    # Save file to Rankings folder
+    # Save files to Rankings and static folders
     prodDefDf.to_csv('Rankings/DefendersRank.csv')
 
     dfi.export(prodDefDf.head(20), 'static/DefenderRank.png')

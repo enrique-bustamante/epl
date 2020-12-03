@@ -45,7 +45,7 @@ def goalies():
     prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
     prodGoalDf['Last Week Ranking'] = lastWeekRankDf
 
-    # Save file to Rankings folder
+    # Save files to Rankings and static folders
     prodGoalDf.to_csv('Rankings/GoalieRank.csv')
 
     dfi.export(prodGoalDf.head(20), 'static/GoalieRank.png')

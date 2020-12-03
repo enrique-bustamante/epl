@@ -44,7 +44,7 @@ def mids():
     prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
     prodMidDf['Last Week Ranking'] = lastWeekRankDf
 
-    # Save file to Rankings folder
+    # Save files to Rankings and static folders
     prodMidDf.to_csv('Rankings/midRank.csv')
 
     dfi.export(prodMidDf.head(20), 'static/MidRank.png')
