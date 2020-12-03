@@ -10,7 +10,7 @@ def mids():
     # read in the data
     midDf = pd.read_csv('Resources/Midfielders.csv')
     midDf
-    lastWeekRankDf = pd.read_csv('Rankings/MidRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = pd.read_csv('Rankings/midRank.csv')[['Name','Ranking']]
     lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
 
