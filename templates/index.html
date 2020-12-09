@@ -11,8 +11,12 @@
     <div style="#000000" class="jumbotron text-center">
         <h1>EPL Fantasy Model</h1>
     </div>
-    <button id="copy tables" type="button">Make Copies of tables</button>
-    <button id="run program" type="button">Click Me!</button>
+    <form action="{{url_for('copies')}}" method="post">
+        <button type="submit" value="submit">Make Copies of tables</button>
+    </form>
+    <form action="{{url_for('update')}}" method="post">
+        <button id="run program" type="submit" >Update tables</button>
+    </form>
 
   </div>
     <div class="container-fluid">
