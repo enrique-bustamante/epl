@@ -8,7 +8,7 @@ def goalies():
 
     # Load in the data
     goalieDf = pd.read_csv('Resources/Goalkeepers.csv')
-    lastWeekRankDf = pd.read_csv('Rankings/GoalieRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = pd.read_csv('Rankings/GoalieRank copy.csv')[['Name','Total Rank']]
     lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
     # Clean the data to make suitable for linear regression analysis
@@ -44,6 +44,10 @@ def goalies():
 
     prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
     prodGoalDf['Last Week Ranking'] = lastWeekRankDf
+    prodGoalDf['Projection'] = prodGoalDf['Prediction'] * prodGoalDf['Cost']
+    prodGoalDf['Proj Rank'] = prodGoalDf['Projection'].rank(ascending=False)
+    prodGoalDf['Total Rank'] = (prodGoalDf['Proj Rank'] + prodGoalDf['Ranking']).rank(ascending=True)
+    prodGoalDf = prodGoalDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
 
     # Save files to Rankings and static folders
     prodGoalDf.to_csv('Rankings/GoalieRank.csv')

@@ -19,7 +19,12 @@ def copies():
         os.popen('cp Rankings/ForwardsRank.csv Rankings/ForwardsRank\ copy.csv')
         os.popen('cp Rankings/GoalieRank.csv Rankings/GoalieRank\ copy.csv')
         os.popen('cp Rankings/midRank.csv Rankings/midRank\ copy.csv')
-        return render_template('index.html')
+        return (
+      '''
+      Copying Successful!<br>
+      <br>
+      <a href='/'>Return to main page</a>
+      ''')
 
 @app.route('/update', methods=['POST'])
 def update():
@@ -28,7 +33,12 @@ def update():
         Forwards.forwards()
         Goalies.goalies()
         Middies.mids()
-        return render_template('index.html')
+        return (
+      '''
+      Updating Successful!<br>
+      <br>
+      <a href='/'>Return to main page</a>
+      ''')
 
 if __name__ == '__main__':
     app.run

@@ -8,7 +8,7 @@ def forwards():
 
     # Load in the data
     forwardsDf = pd.read_csv('Resources/Forwards.csv')
-    lastWeekRankDf = pd.read_csv('Rankings/forwardsRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = pd.read_csv('Rankings/forwardsRank copy.csv')[['Name','Total Rank']]
     lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
     # Clean the data to make suitable for linear regression analysis
@@ -45,6 +45,10 @@ def forwards():
 
     prodForwardDf['Ranking'] = prodForwardDf['Value'].rank(ascending=False)
     prodForwardDf['Last Week Ranking'] = lastWeekRankDf
+    prodForwardDf['Projection'] = prodForwardDf['Prediction'] * prodForwardDf['Cost']
+    prodForwardDf['Proj Rank'] = prodForwardDf['Projection'].rank(ascending=False)
+    prodForwardDf['Total Rank'] = (prodForwardDf['Proj Rank'] + prodForwardDf['Ranking']).rank(ascending=True)
+    prodForwardDf = prodForwardDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
 
     # Save files to Rankings and static folders
     prodForwardDf.to_csv('Rankings/forwardsRank.csv')

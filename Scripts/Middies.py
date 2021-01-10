@@ -8,7 +8,7 @@ def mids():
 
     # Load in the data
     midDf = pd.read_csv('Resources/Midfielders.csv')
-    lastWeekRankDf = pd.read_csv('Rankings/midRank.csv')[['Name','Ranking']]
+    lastWeekRankDf = pd.read_csv('Rankings/midRank copy.csv')[['Name','Total Rank']]
     lastWeekRankDf = lastWeekRankDf.set_index('Name')
 
     # Clean the data to make suitable for linear regression analysis
@@ -43,6 +43,10 @@ def mids():
 
     prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
     prodMidDf['Last Week Ranking'] = lastWeekRankDf
+    prodMidDf['Projection'] = prodMidDf['Prediction'] * prodMidDf['Cost']
+    prodMidDf['Proj Rank'] = prodMidDf['Projection'].rank(ascending=False)
+    prodMidDf['Total Rank'] = (prodMidDf['Proj Rank'] + prodMidDf['Ranking']).rank(ascending=True)
+    prodMidDf = prodMidDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
 
     # Save files to Rankings and static folders
     prodMidDf.to_csv('Rankings/midRank.csv')
