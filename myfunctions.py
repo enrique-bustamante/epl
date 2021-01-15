@@ -35,13 +35,14 @@ def cloneDfs(df: pd.DataFrame) -> pd.DataFrame:
 
 def cleanDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     gameWeek: int = df['Gameweek'].max()
-
     df['Cost'] = df['Cost'].replace('£','', regex=True).astype(float)
 
     df['Location'] = df['Opposition'].apply(homeOrAway)
-
-    costDf = df[df['Gameweek'] == gameWeek][['Name','Cost']]
+    costDf = df[['Name', 'Cost', 'Gameweek']]
+    costDf = costDf.loc[costDf.groupby('Name')['Gameweek'].agg(pd.Series.idxmax)]
+    costDf = costDf[['Name','Cost']]
     costDf = costDf.set_index('Name')
+
     dfForm = df[df['Gameweek'] >= (gameWeek-3)]
     formSeries = dfForm.groupby('Name')['Pts'].mean()
 
