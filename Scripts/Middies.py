@@ -3,7 +3,7 @@ def mids():
     import pandas as pd
     from sklearn.linear_model import LinearRegression
     from sklearn.model_selection import train_test_split
-    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost
+    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost, zScore
     import dataframe_image as dfi
 
     # Load in the data
@@ -41,12 +41,10 @@ def mids():
 
     prodMidDf = prodMidDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
-    prodMidDf['Ranking'] = prodMidDf['Value'].rank(ascending=False)
     prodMidDf['Last Week Ranking'] = lastWeekRankDf
     prodMidDf['Projection'] = prodMidDf['Prediction'] * prodMidDf['Cost']
-    prodMidDf['Proj Rank'] = prodMidDf['Projection'].rank(ascending=False)
-    prodMidDf['Total Rank'] = (prodMidDf['Proj Rank'] + prodMidDf['Ranking']).rank(ascending=True)
-    prodMidDf = prodMidDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
+
+    prodMidDf = zScore(prodMidDf)
 
     # Save files to Rankings and static folders
     prodMidDf.to_csv('Rankings/midRank.csv')

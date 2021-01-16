@@ -3,7 +3,7 @@ def goalies():
     import pandas as pd
     from sklearn.linear_model import LinearRegression
     from sklearn.model_selection import train_test_split
-    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost
+    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost, zScore
     import dataframe_image as dfi
 
     # Load in the data
@@ -42,12 +42,10 @@ def goalies():
 
     prodGoalDf = prodGoalDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
-    prodGoalDf['Ranking'] = prodGoalDf['Value'].rank(ascending=False)
     prodGoalDf['Last Week Ranking'] = lastWeekRankDf
     prodGoalDf['Projection'] = prodGoalDf['Prediction'] * prodGoalDf['Cost']
-    prodGoalDf['Proj Rank'] = prodGoalDf['Projection'].rank(ascending=False)
-    prodGoalDf['Total Rank'] = (prodGoalDf['Proj Rank'] + prodGoalDf['Ranking']).rank(ascending=True)
-    prodGoalDf = prodGoalDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
+
+    prodGoalDf = zScore(prodGoalDf)
 
     # Save files to Rankings and static folders
     prodGoalDf.to_csv('Rankings/GoalieRank.csv')

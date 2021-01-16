@@ -61,6 +61,16 @@ def categoryPerCost(df: pd.DataFrame, listOfCategories: list) -> pd.DataFrame:
         df[category] = df[category]/df['Cost']
     return df
 
+def zScore(df):
+    # Calculate means and STD for value and projections
+    dfValueMean = df['Value'].mean()
+    dfValueSTD = df['Value'].std()
+    dfProjMean = df['Projection'].mean()
+    dfProjSTD = df['Projection'].std()
+    df['Z Score'] = ((df['Value'] - dfValueMean)/dfValueSTD) + ((df['Projection'] - dfProjMean)/dfProjSTD)
 
-
+    df['Total Rank'] = df['Z Score'].rank(ascending=False)
+    df = df[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
+    df = df.sort_values('Total Rank')
+    return df
 # %%

@@ -3,7 +3,7 @@ def forwards():
     import pandas as pd
     from sklearn.linear_model import LinearRegression
     from sklearn.model_selection import train_test_split
-    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost
+    from myfunctions import homeOrAway, homeAwayDifference, cloneDfs, linearRegressionAnalysis, cleanDataFrame, categoryPerCost, zScore
     import dataframe_image as dfi
 
     # Load in the data
@@ -43,12 +43,11 @@ def forwards():
 
     prodForwardDf = prodForwardDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
 
-    prodForwardDf['Ranking'] = prodForwardDf['Value'].rank(ascending=False)
     prodForwardDf['Last Week Ranking'] = lastWeekRankDf
     prodForwardDf['Projection'] = prodForwardDf['Prediction'] * prodForwardDf['Cost']
-    prodForwardDf['Proj Rank'] = prodForwardDf['Projection'].rank(ascending=False)
-    prodForwardDf['Total Rank'] = (prodForwardDf['Proj Rank'] + prodForwardDf['Ranking']).rank(ascending=True)
-    prodForwardDf = prodForwardDf[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
+
+    prodForwardDf = zScore(prodForwardDf)
+
 
     # Save files to Rankings and static folders
     prodForwardDf.to_csv('Rankings/forwardsRank.csv')
