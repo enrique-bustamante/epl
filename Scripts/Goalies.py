@@ -24,7 +24,6 @@ def goalies():
     goalieGroupbyDf = categoryPerCost(goalieGroupbyDf, listOfCategories) # feed in the list of categories and the dataframe to get the new values
 
     goalieGroupbyDf['Availability'] = goalieGroupbyDf['Minutes played']/90
-    goalieGroupbyDf['Form'] = goalieForm
 
     # Run linear regression analysis
     prodGoalDf = linearRegressionAnalysis(goalieGroupbyDf)
@@ -44,6 +43,8 @@ def goalies():
 
     prodGoalDf['Last Week Ranking'] = lastWeekRankDf
     prodGoalDf['Projection'] = prodGoalDf['Prediction'] * prodGoalDf['Cost']
+    prodGoalDf['Form'] = goalieForm
+
 
     prodGoalDf = zScore(prodGoalDf)
 

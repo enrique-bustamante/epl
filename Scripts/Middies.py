@@ -25,7 +25,6 @@ def mids():
     midGroupbyDf = categoryPerCost(midGroupbyDf, listOfCategories)
 
     midGroupbyDf['Availability'] = midGroupbyDf['Minutes played']/90
-    midGroupbyDf['Form'] = midForm
 
     # Run linear regression analysis
     prodMidDf = linearRegressionAnalysis(midGroupbyDf)
@@ -43,6 +42,8 @@ def mids():
 
     prodMidDf['Last Week Ranking'] = lastWeekRankDf
     prodMidDf['Projection'] = prodMidDf['Prediction'] * prodMidDf['Cost']
+    prodMidDf['Form'] = midForm
+
 
     prodMidDf = zScore(prodMidDf)
 

@@ -29,7 +29,6 @@ def defenders():
    defenderGroupbyDf = categoryPerCost(defenderGroupbyDf, listOfCategories)
 
    defenderGroupbyDf['Availability'] = defenderGroupbyDf['Minutes played']/90
-   defenderGroupbyDf['Form'] = defenderForm
    #%%
    # Run linear regression analysis
    prodDefDf = linearRegressionAnalysis(defenderGroupbyDf)
@@ -46,6 +45,7 @@ def defenders():
    prodDefDf = prodDefDf[['Value', 'Prediction', 'Cost', 'Home and Away']]
    prodDefDf['Last Week Ranking'] = lastWeekRankDf
    prodDefDf['Projection'] = prodDefDf['Prediction'] * prodDefDf['Cost']
+   prodDefDf['Form'] = defenderForm
 
    prodDefDf = zScore(prodDefDf)
 

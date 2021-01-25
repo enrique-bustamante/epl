@@ -25,7 +25,6 @@ def forwards():
     forwardsGroupbyDf = categoryPerCost(forwardsGroupbyDf, listOfCategories)
 
     forwardsGroupbyDf['Availability'] = forwardsGroupbyDf['Minutes played']/90
-    forwardsGroupbyDf['Form'] = forwardForm
 
     # Run linear regression analysis
     prodForwardDf = linearRegressionAnalysis(forwardsGroupbyDf)
@@ -45,6 +44,8 @@ def forwards():
 
     prodForwardDf['Last Week Ranking'] = lastWeekRankDf
     prodForwardDf['Projection'] = prodForwardDf['Prediction'] * prodForwardDf['Cost']
+    prodForwardDf['Form'] = forwardForm
+
 
     prodForwardDf = zScore(prodForwardDf)
 

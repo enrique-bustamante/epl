@@ -67,7 +67,9 @@ def zScore(df):
     dfValueSTD = df['Value'].std()
     dfProjMean = df['Projection'].mean()
     dfProjSTD = df['Projection'].std()
-    df['Z Score'] = ((df['Value'] - dfValueMean)/dfValueSTD) + ((df['Projection'] - dfProjMean)/dfProjSTD)
+    dfFormMean = df['Form'].mean()
+    dfFormSTD = df['Form'].std()
+    df['Z Score'] = (2 * ((df['Value'] - dfValueMean)/dfValueSTD)) + (3 * ((df['Projection'] - dfProjMean)/dfProjSTD)) + (((df['Form']) - dfFormMean)/dfFormSTD)
 
     df['Total Rank'] = df['Z Score'].rank(ascending=False)
     df = df[['Value', 'Projection', 'Cost', 'Last Week Ranking', 'Total Rank', 'Home and Away']]
