@@ -77,9 +77,25 @@ The mean and standard deviation were calculated for Value, Form, and Projection 
 
 ## Scripts
 
+First, the dependencies were imported along with the functions from the myfunctions.py sheet. The csv data was imported from resources into a dataframe. 
 
 
 
 ## Limitations
 
-One limitation of this model is that if the site is refreshed, it will run the calculations again and the current rankings and last week rankings will be the same. I am thinking of adding an Update button and only run the script by calling that action.
+One limitation of this model is that if the site is refreshed, it will run the calculations again and the current rankings and last week rankings will be the same. I am thinking of adding an Update button and only run the script by calling that action. The last week value was pulled from the copy of the previous week's data and Name set as the index.
+
+Next, the dataframe was passed through the cleanDataFrame and cloneDfs functions to yield the cost dataframe, the form dataframe, and the cleaned dataframe, along with this dataframe split into home and away games. A groupby dataframe was then created from the cleaned dataframe, obtaining the average of all columns. 
+
+The list of categories and the grouped dataframe were passed through the categoryPerCost function. Availability was added to the dataframe by dividing the players average minutes by 90. This dataframe was then passed through the linearRegressionAnalysis function to get the values and projections. The cost dataframe was then added to the predicted value dataframe as Cost.
+
+After that, the home and away dataframes were passed into the homeAwayDifference formula to create the dataframe to pass through the linearRegressionAnalysis function. Once passed, the Value column of this homeAwayDifference dataframe will be the 'Home and Away' column on our final dataframe.
+
+Following this, the final dataframe was comprised of the Value, Prediction, Cost, and Home and Away columns. The Prediction values were multiplied by the Cost values to create the Projection column. Form and Last Week Ranking were added to the dataframe. This dataframe was then passed through the z-score yielding the final version of the dataframe.
+
+Lastly, the dataframe was saved in the Rankings folder as a csv and turned into an image saved in the Static folder.
+
+
+
+
+
