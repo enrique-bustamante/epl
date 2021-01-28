@@ -24,29 +24,30 @@ Here is a list of technologies utilized in this project
 
 * Data is updated (currently, this is manual)
 * Flask app is run
-* The flask app runs four scripts which are imported as functions
-* Each script imports 2 csvs, cleans the data, groups data by player name, and exports a png and csv
+* The flask app runs opening up to a webpage with two buttons
+* The first button creates a copy of the current rankings to use as the last week's ranking value for the tables
+* The second button runs the four scripts which are imported as functions
+* Each script imports 2 csvs, cleans the data, groups data by player name, calculates a z-score for ranking, and exports a png and csv
     for use on HTML and future purposes
 
 
 ## Functions created
 
-Since the four scripts are identical, with the exception of the position, I
-created function that could be imported and used by all four scripts. Here are the function:
+Since the four scripts are identical, with the exception of the position, functions were created that could be imported and used by all four scripts. Here are the functions:
 
 
 ### Cleaning of the Dataframe
 
-First, for the cleanDataFrame() function, I created a variable to be the most
-recent gameweek using max. Next, I had to clean the ***_Cost_*** columns and
-remove the pound sign. I created a Location column to designate the game as
+First, for the cleanDataFrame() function, a variable was created to be the most
+recent gameweek using the max value for each player. Next,the ***_Cost_*** columns were cleaned and
+the British pound sign was removed. A Location column was created to designate the game as
 being either Home or Away. The following item was to create a cost dataframe,
 saving the most recent cost of the player according to the most recent
-Gameweek, to join with the grouped dataframe later on. I then used groupby to
+Gameweek, to join with the grouped dataframe later on. Groupby was then used to
 get the averages of the points for the last four games, known as form, for
-each player. I then dropped the Gameweek, Opposition, Net Transfers, Selected
-by, and ICT Index columns since they were not of any use in the regression
-analysis.
+each player. The Gameweek, Opposition, Net Transfers, Selected
+by, and ICT Index columns were then dropped since they were not of any use in the regression
+analysis. This function returns the cleaned dataframe, the players and their cost in a dataframe, and the form of the players as a dataframe.
 
 ### Clone Dataframes
 
@@ -68,7 +69,16 @@ The homeAwayDifference functions take the two dataframes, home and away, and cre
 
 ### Home or Away
 
-Lastly, for the homeOrAway() function, I added this within the cleanDataFrame() function to determine if the location was a home or away game.
+For the homeOrAway() function, I added this within the cleanDataFrame() function to determine if the location was a home or away game.
+
+### Z-score
+
+The mean and standard deviation were calculated for Value, Form, and Projection values (explained in Scripts section). To calculate the z-score, the mean was subtracted for the player specific value, then divided by the standard deviation. The z-score for Value and Projection were multiplied by 2, then all three z-scores were added together.
+
+## Scripts
+
+
+
 
 ## Limitations
 
